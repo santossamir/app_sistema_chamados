@@ -8,7 +8,7 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassworld] = useState('');
   
-  const {signUp} = useContext(AuthContext);
+  const {signUp, loadingAuth} = useContext(AuthContext);
 
   function handleSubmit(e){
     e.preventDefault();
@@ -28,7 +28,7 @@ export default function SignUp() {
             <input type="text" placeholder="Seu nome" value={nome} onChange={(e) => setNome(e.target.value)} />
             <input type="text" placeholder='email@email.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
             <input type="password" placeholder='******' value={password} onChange={(e) => setPassworld(e.target.value)} />
-            <button type="submit">Cadastrar</button>
+            <button type="submit">{loadingAuth? 'Carregando...' : 'Cadastrar'}</button>
           </form>
           <Link to="/">Já tem uma conta? Clique aqui.</Link>
         </div>
