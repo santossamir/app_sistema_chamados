@@ -138,16 +138,19 @@ export default function Dashboard(){
                                             <td data-label="Cliente">{item.cliente}</td>
                                             <td data-label="Assunto">{item.assunto}</td>
                                             <td data-label="Status">
-                                                <span className="badge" style={{backgroundColor: item.status === 'Aberto' ? '#5cb85c' : '#999'}}>{item.status}</span>
+                                                <span className="badge" 
+                                                      style={{backgroundColor: item.status === 'Aberto' && '#5cb85c' || item.status === 'Progresso' && '#999' || item.status === 'Atendido' && '#326bc7'}}>
+                                                    {item.status}
+                                                </span>
                                             </td>
                                             <td data-label="Cadastrado">{item.createdFormated}</td>
                                             <td data-label="#">
                                                 <button className="action" style={{backgroundColor: '#3583f6'}} onClick={()=> togglePostModal(item)}>
                                                     <FiSearch color="#FFF" size={17}/>
                                                 </button>
-                                                <button className="action" style={{backgroundColor: '#F6a935'}}>
+                                                <Link to={`/new/${item.id}`} className="action" style={{backgroundColor: '#F6a935'}}>
                                                     <FiEdit2 color="#FFF" size={17}/>
-                                                </button>
+                                                </Link>
                                             </td>
                                         </tr>
                                     )
