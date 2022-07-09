@@ -8,6 +8,8 @@ do pacote react-icons/fi para os icones do projeto, da biblioteca react-toastify
 mensagens customizadas e da biblioteca Context API para autenticação e armazenamento
 de dados do formulário para passar aos componentes.
 
+Link para testar: https://the-awesome-santossamir-site.netlify.app/
+
 Para ter uma ideia, observe os prints:
 - Página de login e de cadastro
 ![Captura de tela de 2022-07-09 15-08-52](https://user-images.githubusercontent.com/88064533/178117916-cbe5fab1-3ca3-4a94-b50e-1c31fc365e16.png)
