@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import firebase from "../../services/FirebaseConnection";
 import Header from '../../components/Header';
 import Title from "../../components/Title";
+import Modal from "../../components/Modal";
 import { FiMessageSquare, FiPlus, FiSearch, FiEdit2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
@@ -15,23 +16,27 @@ export default function Dashboard(){
     const [loadingMore, setLoadingMore] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
     const [lastDocs, setLastDocs] = useState();
+    const [showPostModal, setShowPostModal] = useState(false);
+    const [detail, setDetail] = useState();
     
-    async function loadChamados(){
-        await listRef.limit(5)
-        .get()
-        .then((snapshot)=>{
-            updateState(snapshot);
-        })
-        .catch((error)=>{
-            console.log("Error => ", error);
-            setLoadingMore(false);
-        })
-
-        setLoading(false);
-    }
-
     useEffect(()=>{
+
+        async function loadChamados(){
+            await listRef.limit(5)
+            .get()
+            .then((snapshot)=>{
+                updateState(snapshot);
+            })
+            .catch((error)=>{
+                console.log("Error => ", error);
+                setLoadingMore(false);
+            })
+
+            setLoading(false);
+         }
+    
         loadChamados();
+        
         return ()=>{ }
     }, []);
 
@@ -72,6 +77,11 @@ export default function Dashboard(){
         .then((snapshot)=>{
             updateState(snapshot);
         })
+    }
+
+    function togglePostModal(item){
+        setShowPostModal(!showPostModal);
+        setDetail(item);
     }
 
     if(loading){
@@ -123,7 +133,6 @@ export default function Dashboard(){
                             </thead>
                             <tbody>
                                 {chamados.map((item, index)=>{
-                                    {console.log("Sou chamados 1 ", chamados);}
                                     return(
                                         <tr key={index}>
                                             <td data-label="Cliente">{item.cliente}</td>
@@ -133,7 +142,7 @@ export default function Dashboard(){
                                             </td>
                                             <td data-label="Cadastrado">{item.createdFormated}</td>
                                             <td data-label="#">
-                                                <button className="action" style={{backgroundColor: '#3583f6'}}>
+                                                <button className="action" style={{backgroundColor: '#3583f6'}} onClick={()=> togglePostModal(item)}>
                                                     <FiSearch color="#FFF" size={17}/>
                                                 </button>
                                                 <button className="action" style={{backgroundColor: '#F6a935'}}>
@@ -150,6 +159,9 @@ export default function Dashboard(){
                     </>
                 )}
             </div>
+            {showPostModal &&(
+                <Modal conteudo={detail} close={togglePostModal}/>  
+            )}
         </div>
     )
 }
