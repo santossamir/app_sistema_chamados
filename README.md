@@ -11,7 +11,7 @@ de dados do formulário para passar aos componentes.
 Para ter uma ideia, observe os prints:
 
 - Página de login e de cadastro
-![Captura de tela de 2022-07-09 14-54-47](https://user-images.githubusercontent.com/88064533/178117478-95a401bb-e47f-41ae-881d-9714630682d6.png)
+![Captura de tela de 2022-07-09 15-08-52](https://user-images.githubusercontent.com/88064533/178117916-cbe5fab1-3ca3-4a94-b50e-1c31fc365e16.png)
 
 - Página para editar o perfil
 ![Captura de tela de 2022-07-09 14-48-58](https://user-images.githubusercontent.com/88064533/178117606-6a2d00c6-998a-4849-810e-e0042d139e00.png)
