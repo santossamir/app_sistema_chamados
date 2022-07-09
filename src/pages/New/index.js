@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Title from "../../components/Title";
 import { FiPlus } from "react-icons/fi";
 import { AuthContext } from "../../contexts/auth";
+import { toast } from "react-toastify";
 import './new.css';
 
 export default function New(){
@@ -47,8 +48,28 @@ export default function New(){
         loadCustomers();
     }, []);
 
-    function handleRegister(e){
+    async function handleRegister(e){
         e.preventDefault();
+
+        await firebase.firestore().collection('chamados')
+        .add({
+            created: new Date(),
+            cliente: customers[customersSelected].nomeFantasia,
+            clienteId: customers[customersSelected].id,
+            assunto: assunto,
+            status: status,
+            complemento: complemento,
+            userId:user.uid
+        })
+        .then(()=>{
+            toast.success('Chamado inserido com sucesso!');
+            setComplemento('');
+            setCustomersSelected(0);
+        })
+        .catch((error)=>{
+            toast.error('Ops!? Erro ao tentar registrar. Tente mais tarde.');
+            console.log("Erros => ", error);
+        })
     }
 
     //Para quando troca o assunto
